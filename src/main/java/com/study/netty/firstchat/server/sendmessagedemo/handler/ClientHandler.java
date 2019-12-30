@@ -36,8 +36,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         if(decode instanceof LoginRequestPacket){
             LoginRequestPacket packet = (LoginRequestPacket) decode;
             log.info("客户端接受到消息");
-            log.info("是否登录成功:{}",packet.getIsSuccess());
-            log.info("登录响应:{}",packet.getMessage());
+            log.info("是否登录成功:【{}】",packet.getTig());
+            log.info("登录响应:【{}】",packet.getMessage());
         }else if(decode instanceof MessageResponsePacket){
             MessageResponsePacket messageResponsePacket = (MessageResponsePacket) decode;
             System.out.println("服务端:"+messageResponsePacket.getMessage());

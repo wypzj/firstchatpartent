@@ -65,14 +65,14 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         //检验登录
         if (valid(loginRequestPacket)) {
             //登录成功
-            requestPacket.setIsSuccess("success");
+            requestPacket.setTig(true);
             requestPacket.setMessage("登录成功");
             //登录成功后设置已经登录的标识
             ctx.channel().attr(Attributes.LOGIN).set(true);
         } else {
             //登录失败
             requestPacket.setMessage("登录失败");
-            requestPacket.setIsSuccess("fail");
+            requestPacket.setTig(false);
         }
         //对消息进行编码
         return PacketCodeC.INSTANCE.encode(requestPacket);

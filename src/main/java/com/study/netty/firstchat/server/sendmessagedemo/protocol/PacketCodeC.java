@@ -48,6 +48,24 @@ public class PacketCodeC {
         return byteBuf;
     }
 
+    /**
+     * 编码
+     *改版后的encode方法
+     * @param packet
+     * @return ByteBuf
+     */
+    public void encode(Packet packet,ByteBuf byteBuf) {
+        //2.序列化对象
+        byte[] serialize = Serializer.DEFAULT_ALGORITHM.serialize(packet);
+        //2.编写协议
+        byteBuf.writeInt(MAGIC_NUMBER);
+        byteBuf.writeByte(packet.getVersion());
+        byteBuf.writeByte(Serializer.DEFAULT_ALGORITHM.getSerializerAlgorithm());
+        byteBuf.writeByte(packet.getCommand());
+        byteBuf.writeInt(serialize.length);
+        byteBuf.writeBytes(serialize);
+    }
+
     public Packet decode(ByteBuf byteBuf) {
         //1.获取魔法值
         int magicNumber = byteBuf.readInt();
@@ -63,7 +81,9 @@ public class PacketCodeC {
         byte[] data = new byte[dataLength];
         byteBuf.readBytes(data);
 
+        //判断这条协议是什么指令
         Class<? extends Packet> packet = getPacketByCommand(command);
+        //判断这条协议中的数据使用什么序列化方式
         Serializer serializer = getSerializer(serializerAlgorithm);
         assert packet != null;
         assert serializer != null;

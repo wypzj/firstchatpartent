@@ -1,6 +1,7 @@
 package com.study.netty.firstchat.server.sendmessagedemo;
 
 import com.study.netty.firstchat.server.sendmessagedemo.handler.ServerHandler;
+import com.study.netty.firstchat.server.sendmessagedemo.improvehandler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -36,12 +37,15 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new ServerHandler());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
         //绑定固定端口
 //        serverBootstrap.bind(1000);
-        bind(serverBootstrap, 3306);
+        bind(serverBootstrap, 3307);
     }
 
     /**

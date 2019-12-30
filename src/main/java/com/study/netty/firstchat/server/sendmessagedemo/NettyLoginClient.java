@@ -1,7 +1,8 @@
 package com.study.netty.firstchat.server.sendmessagedemo;
 
-import com.study.netty.firstchat.server.sendmessagedemo.handler.ClientHandler;
-import com.study.netty.firstchat.server.sendmessagedemo.improvehandler.*;
+import com.study.netty.firstchat.server.sendmessagedemo.improvehandler.LoginResponseHandler;
+import com.study.netty.firstchat.server.sendmessagedemo.improvehandler.PacketDecoder;
+import com.study.netty.firstchat.server.sendmessagedemo.improvehandler.PacketEncoder;
 import com.study.netty.firstchat.server.sendmessagedemo.pojo.request.MessageRequestPacket;
 import com.study.netty.firstchat.server.sendmessagedemo.protocol.PacketCodeC;
 import io.netty.bootstrap.Bootstrap;
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @author 卫云鹏
  * @date in 20:52 2019/12/15
  */
-public class NettyClient {
+public class NettyLoginClient {
     public static Integer RETRY_TIMES = 6;
 
     public static void main(String[] args) {
@@ -37,7 +38,6 @@ public class NettyClient {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         //建立连接时，发送消息相关业务逻辑处理
                         ch.pipeline().addLast(new PacketDecoder());
-                        ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new LoginResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }

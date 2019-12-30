@@ -17,7 +17,7 @@ public class LoginRequestPacket extends Packet {
 
     private String password;
 
-    private String isSuccess;
+    private Boolean tig;
 
     private String message;
 
