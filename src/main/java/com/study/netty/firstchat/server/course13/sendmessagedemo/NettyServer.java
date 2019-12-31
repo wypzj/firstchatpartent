@@ -4,6 +4,7 @@ import com.study.netty.firstchat.server.course13.sendmessagedemo.improvehandler.
 import com.study.netty.firstchat.server.course13.sendmessagedemo.improvehandler.MessageRequestHandler;
 import com.study.netty.firstchat.server.course13.sendmessagedemo.improvehandler.PacketDecoder;
 import com.study.netty.firstchat.server.course13.sendmessagedemo.improvehandler.PacketEncoder;
+import com.study.netty.firstchat.server.course13.sendmessagedemo.improvehandler.decoder.CheckProtocolMagicDecoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -40,7 +41,7 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4));
+                        ch.pipeline().addLast(new CheckProtocolMagicDecoder());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());

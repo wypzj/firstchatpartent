@@ -25,7 +25,7 @@ public class PacketCodeC {
     /**
      * 协议头魔法值
      */
-    private static final int MAGIC_NUMBER = 12345678;
+    public static final int MAGIC_NUMBER = 12345678;
 
     /**
      * 编码
