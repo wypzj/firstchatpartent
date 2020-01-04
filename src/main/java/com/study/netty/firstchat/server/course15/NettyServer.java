@@ -37,10 +37,11 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new LifeCyCleTestHandler());
                         ch.pipeline().addLast(new CheckProtocolMagicDecoder());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
+                        //效验是否已经登录的逻辑
+                        ch.pipeline().addLast(new LoginCheckHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }

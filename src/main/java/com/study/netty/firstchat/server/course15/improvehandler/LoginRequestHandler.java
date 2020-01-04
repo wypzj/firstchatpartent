@@ -1,5 +1,6 @@
 package com.study.netty.firstchat.server.course15.improvehandler;
 
+import com.study.netty.firstchat.server.course15.constants.Attributes;
 import com.study.netty.firstchat.server.course15.pojo.request.LoginRequestPacket;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -15,6 +16,8 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
         System.out.println("接受到客户端发送的登录请求");
         if(msg.getUsername() != null){
+            //设置登录状态
+            ctx.channel().attr(Attributes.LOGIN).set(true);
             loginRequestPacket.setTig(true);
             loginRequestPacket.setMessage("用户：【"+msg.getUsername()+"】登录成功");
         }else{

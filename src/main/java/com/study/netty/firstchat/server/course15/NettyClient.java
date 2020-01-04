@@ -90,10 +90,8 @@ public class NettyClient {
                 MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
                 messageRequestPacket.setMessage(input);
                 //发送
-                for (int i = 0; i < 1000; i++) {
-                    ByteBuf encode = PacketCodeC.INSTANCE.encode(messageRequestPacket);
-                    channel.writeAndFlush(encode);
-                }
+                ByteBuf encode = PacketCodeC.INSTANCE.encode(messageRequestPacket);
+                channel.writeAndFlush(encode);
             }
         }).start();
     }
