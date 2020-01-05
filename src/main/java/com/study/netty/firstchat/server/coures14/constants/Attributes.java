@@ -1,4 +1,4 @@
-package com.study.netty.firstchat.server.courese14.constants;
+package com.study.netty.firstchat.server.coures14.constants;
 
 import io.netty.util.AttributeKey;
 

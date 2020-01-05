@@ -1,7 +1,7 @@
-package com.study.netty.firstchat.server.courese14.pojo.request;
+package com.study.netty.firstchat.server.coures14.pojo.request;
 
-import com.study.netty.firstchat.server.courese14.constants.Command;
-import com.study.netty.firstchat.server.courese14.pojo.abstractpojo.Packet;
+import com.study.netty.firstchat.server.coures14.constants.Command;
+import com.study.netty.firstchat.server.coures14.pojo.abstractpojo.Packet;
 import lombok.Data;
 
 /**

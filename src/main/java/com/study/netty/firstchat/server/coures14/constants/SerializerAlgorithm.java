@@ -1,4 +1,4 @@
-package com.study.netty.firstchat.server.courese14.constants;
+package com.study.netty.firstchat.server.coures14.constants;
 
 /**
  * 序列化算法种类的常量类

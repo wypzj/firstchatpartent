@@ -1,4 +1,4 @@
-package com.study.netty.firstchat.server.courese14.pojo.abstractpojo;
+package com.study.netty.firstchat.server.coures14.pojo.abstractpojo;
 
 import lombok.Getter;
 

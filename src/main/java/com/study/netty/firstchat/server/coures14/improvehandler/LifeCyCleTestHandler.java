@@ -1,4 +1,4 @@
-package com.study.netty.firstchat.server.courese14.improvehandler;
+package com.study.netty.firstchat.server.coures14.improvehandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

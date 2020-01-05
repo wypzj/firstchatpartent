@@ -1,13 +1,13 @@
-package com.study.netty.firstchat.server.courese14.protocol;
+package com.study.netty.firstchat.server.coures14.protocol;
 
-import com.study.netty.firstchat.server.courese14.constants.Command;
-import com.study.netty.firstchat.server.courese14.constants.SerializerAlgorithm;
-import com.study.netty.firstchat.server.courese14.pojo.abstractpojo.Packet;
-import com.study.netty.firstchat.server.courese14.pojo.request.LoginRequestPacket;
-import com.study.netty.firstchat.server.courese14.pojo.request.MessageRequestPacket;
-import com.study.netty.firstchat.server.courese14.pojo.response.MessageResponsePacket;
-import com.study.netty.firstchat.server.courese14.serialize.JSONSerializer;
-import com.study.netty.firstchat.server.courese14.serialize.inter.Serializer;
+import com.study.netty.firstchat.server.coures14.constants.Command;
+import com.study.netty.firstchat.server.coures14.constants.SerializerAlgorithm;
+import com.study.netty.firstchat.server.coures14.pojo.abstractpojo.Packet;
+import com.study.netty.firstchat.server.coures14.pojo.request.LoginRequestPacket;
+import com.study.netty.firstchat.server.coures14.pojo.request.MessageRequestPacket;
+import com.study.netty.firstchat.server.coures14.pojo.response.MessageResponsePacket;
+import com.study.netty.firstchat.server.coures14.serialize.JSONSerializer;
+import com.study.netty.firstchat.server.coures14.serialize.inter.Serializer;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import lombok.extern.slf4j.Slf4j;

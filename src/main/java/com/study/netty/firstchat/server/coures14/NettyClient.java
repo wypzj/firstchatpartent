@@ -1,11 +1,11 @@
-package com.study.netty.firstchat.server.courese14;
+package com.study.netty.firstchat.server.coures14;
 
-import com.study.netty.firstchat.server.courese14.improvehandler.LoginResponseHandler;
-import com.study.netty.firstchat.server.courese14.improvehandler.MessageResponseHandler;
-import com.study.netty.firstchat.server.courese14.improvehandler.PacketDecoder;
-import com.study.netty.firstchat.server.courese14.improvehandler.PacketEncoder;
-import com.study.netty.firstchat.server.courese14.pojo.request.MessageRequestPacket;
-import com.study.netty.firstchat.server.courese14.protocol.PacketCodeC;
+import com.study.netty.firstchat.server.coures14.improvehandler.LoginResponseHandler;
+import com.study.netty.firstchat.server.coures14.improvehandler.MessageResponseHandler;
+import com.study.netty.firstchat.server.coures14.improvehandler.PacketDecoder;
+import com.study.netty.firstchat.server.coures14.improvehandler.PacketEncoder;
+import com.study.netty.firstchat.server.coures14.pojo.request.MessageRequestPacket;
+import com.study.netty.firstchat.server.coures14.protocol.PacketCodeC;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;

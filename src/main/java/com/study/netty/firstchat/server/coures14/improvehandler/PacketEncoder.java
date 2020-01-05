@@ -1,7 +1,7 @@
-package com.study.netty.firstchat.server.courese14.improvehandler;
+package com.study.netty.firstchat.server.coures14.improvehandler;
 
-import com.study.netty.firstchat.server.courese14.pojo.abstractpojo.Packet;
-import com.study.netty.firstchat.server.courese14.protocol.PacketCodeC;
+import com.study.netty.firstchat.server.coures14.pojo.abstractpojo.Packet;
+import com.study.netty.firstchat.server.coures14.protocol.PacketCodeC;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;

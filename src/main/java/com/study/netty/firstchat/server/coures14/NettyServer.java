@@ -1,7 +1,7 @@
-package com.study.netty.firstchat.server.courese14;
+package com.study.netty.firstchat.server.coures14;
 
-import com.study.netty.firstchat.server.courese14.improvehandler.*;
-import com.study.netty.firstchat.server.courese14.improvehandler.decoder.CheckProtocolMagicDecoder;
+import com.study.netty.firstchat.server.coures14.improvehandler.*;
+import com.study.netty.firstchat.server.coures14.improvehandler.decoder.CheckProtocolMagicDecoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;

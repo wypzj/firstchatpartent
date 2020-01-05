@@ -1,6 +1,6 @@
-package com.study.netty.firstchat.server.courese14.serialize.inter;
+package com.study.netty.firstchat.server.coures14.serialize.inter;
 
-import com.study.netty.firstchat.server.courese14.serialize.JSONSerializer;
+import com.study.netty.firstchat.server.coures14.serialize.JSONSerializer;
 
 /**
  * 序列化抽象接口

@@ -1,8 +1,8 @@
-package com.study.netty.firstchat.server.courese14.serialize;
+package com.study.netty.firstchat.server.coures14.serialize;
 
 import com.alibaba.fastjson.JSON;
-import com.study.netty.firstchat.server.courese14.constants.SerializerAlgorithm;
-import com.study.netty.firstchat.server.courese14.serialize.inter.Serializer;
+import com.study.netty.firstchat.server.coures14.constants.SerializerAlgorithm;
+import com.study.netty.firstchat.server.coures14.serialize.inter.Serializer;
 
 /**
  * JSON类型的序列化算法

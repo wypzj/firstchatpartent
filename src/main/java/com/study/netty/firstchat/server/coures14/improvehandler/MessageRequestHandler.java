@@ -1,6 +1,6 @@
-package com.study.netty.firstchat.server.courese14.improvehandler;
+package com.study.netty.firstchat.server.coures14.improvehandler;
 
-import com.study.netty.firstchat.server.courese14.pojo.request.MessageRequestPacket;
+import com.study.netty.firstchat.server.coures14.pojo.request.MessageRequestPacket;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
