@@ -13,6 +13,20 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MessageRequestPacket extends Packet {
+    /**
+     * 消息接受人id
+     */
+    private String toUserId;
+    /**
+     * 消息发送人id
+     */
+    private String fromUserId;
+
+    /**
+     * 消息发送人姓名
+     */
+    private String fromUserName;
+
     private String message;
     @Override
     public Byte getCommand() {

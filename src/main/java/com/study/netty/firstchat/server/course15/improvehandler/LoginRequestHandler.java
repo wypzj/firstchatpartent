@@ -1,11 +1,15 @@
 package com.study.netty.firstchat.server.course15.improvehandler;
 
-import com.study.netty.firstchat.server.course15.constants.Attributes;
 import com.study.netty.firstchat.server.course15.pojo.request.LoginRequestPacket;
+import com.study.netty.firstchat.server.course15.util.Session;
+import com.study.netty.firstchat.server.course15.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+import java.util.UUID;
+
 /**
+ * 服务端登录请求handler
  * @author 卫云鹏
  * @date in 23:22 2019/12/23
  */
@@ -17,9 +21,14 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         System.out.println("接受到客户端发送的登录请求");
         if(msg.getUsername() != null){
             //设置登录状态
-            ctx.channel().attr(Attributes.LOGIN).set(true);
+            Session session = new Session();
+            //16位userid
+            String userId = UUID.randomUUID().toString();
+            session.setUserId(userId);
+            session.setUserName(msg.getUsername());
+            SessionUtil.bindSession(session,ctx.channel());
             loginRequestPacket.setTig(true);
-            loginRequestPacket.setMessage("用户：【"+msg.getUsername()+"】登录成功");
+            loginRequestPacket.setMessage("userId:【"+userId+"】,用户：【"+msg.getUsername()+"】登录成功");
         }else{
             loginRequestPacket.setTig(false);
             loginRequestPacket.setMessage("用户名为空，登录失败");

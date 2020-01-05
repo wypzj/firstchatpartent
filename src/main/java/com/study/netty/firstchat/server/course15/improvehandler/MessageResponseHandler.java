@@ -6,6 +6,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 客户端消息handler
  * @author 卫云鹏
  * @date in 23:29 2019/12/23
  */
@@ -14,11 +15,8 @@ public class MessageResponseHandler extends SimpleChannelInboundHandler<MessageR
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket msg) throws Exception {
-        System.out.println("客户端收到服务端发送的消息："+msg.getMessage());
-    }
-
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        super.channelActive(ctx);
+        String fromUserId = msg.getFromUserId();
+        String fromUserName = msg.getFromUserName();
+        System.out.println("【"+fromUserId+":"+fromUserName+"】-->"+msg.getMessage());
     }
 }

@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 public class LoginRequestPacket extends Packet {
-    private Long userId;
+    private String userId;
 
     private String username;
 

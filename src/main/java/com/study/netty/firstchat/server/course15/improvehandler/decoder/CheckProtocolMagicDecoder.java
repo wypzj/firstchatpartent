@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
 /**
+ * 效验发送的协议是否是定义的那一种
  * @author 卫云鹏
  * @date in 10:12 2019/12/31
  */

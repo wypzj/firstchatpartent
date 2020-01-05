@@ -56,7 +56,6 @@ public class NettyClient {
                 ChannelFuture channelFuture = (ChannelFuture) future;
                 Channel channel = channelFuture.channel();
                 //连接成功后启动控制台线程，可以输入向后台发送消息
-                System.out.println("输入消息发送到服务器端：");
                 startConsoleThread(channel);
             } else if (maxRetry < 1) {
                 System.out.println("连接失败，所有次数都用完了");
@@ -86,9 +85,12 @@ public class NettyClient {
                 //运行run方法
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
+
                 //编码
                 MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
-                messageRequestPacket.setMessage(input);
+                String[] inputStr = input.split(" ",1);
+                messageRequestPacket.setToUserId(inputStr[0]);
+                messageRequestPacket.setMessage(inputStr[1]);
                 //发送
                 ByteBuf encode = PacketCodeC.INSTANCE.encode(messageRequestPacket);
                 channel.writeAndFlush(encode);

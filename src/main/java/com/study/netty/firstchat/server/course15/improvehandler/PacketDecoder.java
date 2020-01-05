@@ -8,6 +8,7 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import java.util.List;
 
 /**
+ * 协议解码器
  * @author 卫云鹏
  * @date in 23:39 2019/12/23
  */
