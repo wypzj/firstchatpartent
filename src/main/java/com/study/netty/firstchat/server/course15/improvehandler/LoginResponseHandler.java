@@ -15,11 +15,12 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginReque
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket msg) throws Exception {
         System.out.println("客户端收到登录请求的回应......");
-        System.out.println(msg.getMessage());
-        System.out.println("是否已登录:"+msg.getTig());
+        System.out.println(msg.getUsername());
+        System.out.println("userId:【"+msg.getUserId()+"】，userName:【"+msg.getUsername()+"】，是否已登录:"+msg.getTig());
         if(msg.getTig()){
             Session session = new Session();
-            String message = msg.getMessage();
+            session.setUserName(msg.getUsername());
+            session.setUserId(msg.getUserId());
             ctx.channel().attr(Attributes.SESSION).set(session);
         }
     }
@@ -31,11 +32,11 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginReque
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("客户端发送登录请求.....");
-        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-        loginRequestPacket.setUsername("张菊");
-        loginRequestPacket.setPassword("W&Z");
-
-        ctx.channel().writeAndFlush(loginRequestPacket);
+//        System.out.println("客户端发送登录请求.....");
+//        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+//        loginRequestPacket.setUsername("张菊");
+//        loginRequestPacket.setPassword("W&Z");
+//
+//        ctx.channel().writeAndFlush(loginRequestPacket);
     }
 }

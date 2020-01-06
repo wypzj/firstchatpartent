@@ -4,8 +4,10 @@ import com.study.netty.firstchat.server.course15.improvehandler.LoginResponseHan
 import com.study.netty.firstchat.server.course15.improvehandler.MessageResponseHandler;
 import com.study.netty.firstchat.server.course15.improvehandler.PacketDecoder;
 import com.study.netty.firstchat.server.course15.improvehandler.PacketEncoder;
+import com.study.netty.firstchat.server.course15.pojo.request.LoginRequestPacket;
 import com.study.netty.firstchat.server.course15.pojo.request.MessageRequestPacket;
 import com.study.netty.firstchat.server.course15.protocol.PacketCodeC;
+import com.study.netty.firstchat.server.course15.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -40,8 +42,8 @@ public class NettyClient {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4));
                         ch.pipeline().addLast(new PacketDecoder());
-                        ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
@@ -84,16 +86,31 @@ public class NettyClient {
             while (!Thread.interrupted()) {
                 //运行run方法
                 Scanner scanner = new Scanner(System.in);
-                String input = scanner.nextLine();
-
-                //编码
-                MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
-                String[] inputStr = input.split(" ",1);
-                messageRequestPacket.setToUserId(inputStr[0]);
-                messageRequestPacket.setMessage(inputStr[1]);
-                //发送
-                ByteBuf encode = PacketCodeC.INSTANCE.encode(messageRequestPacket);
-                channel.writeAndFlush(encode);
+                if(!SessionUtil.checkIsLogin(channel)){
+                    //未登录
+                    System.out.println("请输入用户名进行登录：");
+                    String userName = scanner.nextLine();
+                    LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+                    loginRequestPacket.setUsername(userName);
+                    System.out.println("客户端发送登录请求.....");
+                    channel.writeAndFlush(loginRequestPacket);
+                    //等待登录响应
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    String input = scanner.nextLine();
+                    //编码
+                    MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
+                    String[] inputStr = input.split(" ",0);
+                    messageRequestPacket.setToUserId(inputStr[0]);
+                    messageRequestPacket.setMessage(inputStr[1]);
+                    //发送
+                    ByteBuf encode = PacketCodeC.INSTANCE.encode(messageRequestPacket);
+                    channel.writeAndFlush(encode);
+                }
             }
         }).start();
     }

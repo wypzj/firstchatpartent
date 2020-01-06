@@ -27,6 +27,8 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             session.setUserId(userId);
             session.setUserName(msg.getUsername());
             SessionUtil.bindSession(session,ctx.channel());
+            loginRequestPacket.setUsername(msg.getUsername());
+            loginRequestPacket.setUserId(userId);
             loginRequestPacket.setTig(true);
             loginRequestPacket.setMessage("userId:【"+userId+"】,用户：【"+msg.getUsername()+"】登录成功");
         }else{
