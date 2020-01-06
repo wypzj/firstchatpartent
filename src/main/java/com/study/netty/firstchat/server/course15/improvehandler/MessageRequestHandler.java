@@ -35,6 +35,6 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
         msg.setFromUserId(session.getUserId());
         msg.setFromUserName(session.getUserName());
         System.out.println("服务端收到消息:" + message+"，服务端转发消息");
-        channel.pipeline().writeAndFlush(msg);
+        channel.writeAndFlush(msg);
     }
 }

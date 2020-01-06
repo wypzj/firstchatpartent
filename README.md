@@ -20,4 +20,5 @@
 
 ### course15:
 
-实战使用channelHandler的热拔插实现客户端身份效验
+1. 实战使用channelHandler的热拔插实现客户端身份效验
+2. 实现单客户端之间的聊天通信
