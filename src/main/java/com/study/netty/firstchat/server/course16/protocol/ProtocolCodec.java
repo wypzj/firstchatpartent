@@ -32,6 +32,7 @@ public class ProtocolCodec {
         byteBuf.writeByte(packet.getCommand());
         //数据长度
         byteBuf.writeInt(bytes.length);
+        //数据
         byteBuf.writeBytes(bytes);
         return byteBuf;
     }
@@ -43,6 +44,21 @@ public class ProtocolCodec {
      */
     public AbstractPacket decode(ByteBuf byteBuf){
         //TODO 2020/1/6 20:25 今晚完成解码工作
+        //魔数
+        int magicNum = byteBuf.readInt();
+        //协议版本
+        byte version = byteBuf.readByte();
+        //序列化算法
+        byte serializerNum = byteBuf.readByte();
+        //指令
+        byte command = byteBuf.readByte();
+
+        //数据长度
+        int datalLength = byteBuf.readInt();
+        //数据
+        byte[] bytes = new byte[datalLength];
+        byteBuf.readBytes(bytes);
+
         return null;
     }
 }
