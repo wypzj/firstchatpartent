@@ -1,13 +1,15 @@
 package com.study.netty.firstchat.server.course16.client;
 
+import com.study.netty.firstchat.server.course16.client.handler.LoginResponseHandler;
+import com.study.netty.firstchat.server.course16.client.handler.MessageResponseHandler;
+import com.study.netty.firstchat.server.course16.commonhandler.PacketDecoder;
+import com.study.netty.firstchat.server.course16.commonhandler.PacketEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 
 import java.util.Scanner;
 
@@ -26,7 +28,11 @@ public class NettyClient {
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-
+                        //TODO 效验使用的协议以及对沾包半包问题的处理handler
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
         connectServer(bootstrap);
@@ -44,7 +50,7 @@ public class NettyClient {
                 startConsoleThread(channel);
             } else {
                 //连接失败,每隔3s会重试连接
-                //TODO 一直连接不上会死循环
+                //TODO 一直连接不上会死循环，需要优化
                 System.out.println("连接失败！3s后重试");
                 Thread.sleep(3000);
                 connectServer(bootstrap);

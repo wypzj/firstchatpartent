@@ -7,7 +7,7 @@ import com.study.netty.firstchat.server.course16.packet.inter.AbstractPacket;
  * @author 卫云鹏
  * @date in 19:23 2020/1/6
  */
-public class MessageRequestPacket extends AbstractPacket {
+public class MessagePacket extends AbstractPacket {
     /**
      * 消息接收人id
      */

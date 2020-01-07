@@ -1,6 +1,9 @@
 package com.study.netty.firstchat.server.course16.protocol;
 
+import com.study.netty.firstchat.server.course16.common.CommandsAndClassEnum;
+import com.study.netty.firstchat.server.course16.common.SerializeConstants;
 import com.study.netty.firstchat.server.course16.packet.inter.AbstractPacket;
+import com.study.netty.firstchat.server.course16.serializer.JSONSerializer;
 import com.study.netty.firstchat.server.course16.serializer.inter.Serializer;
 import io.netty.buffer.ByteBuf;
 
@@ -11,6 +14,8 @@ import io.netty.buffer.ByteBuf;
  */
 public class ProtocolCodec {
     public static final int MAGIC_NUMBER = 0X123456;
+
+    public static ProtocolCodec INSTANCE = new ProtocolCodec();
     /**
      * 编码
      * @param byteBuf
@@ -43,7 +48,6 @@ public class ProtocolCodec {
      * @return
      */
     public AbstractPacket decode(ByteBuf byteBuf){
-        //TODO 2020/1/6 20:25 今晚完成解码工作
         //魔数
         int magicNum = byteBuf.readInt();
         //协议版本
@@ -58,7 +62,18 @@ public class ProtocolCodec {
         //数据
         byte[] bytes = new byte[datalLength];
         byteBuf.readBytes(bytes);
+        //协议类类型
+        Class<? extends AbstractPacket> packetClass = CommandsAndClassEnum.getPacketClass(command);
+        //序列化算法
+        Serializer serializer = getSerializer(serializerNum);
+        return serializer.bytes2java(bytes, packetClass);
+    }
 
+    private Serializer getSerializer(byte serializerNum){
+        if(serializerNum == SerializeConstants.JSON_SERIALIZER){
+            return new JSONSerializer();
+        }
+        //TODO 匹配不到应该报错
         return null;
     }
 }
