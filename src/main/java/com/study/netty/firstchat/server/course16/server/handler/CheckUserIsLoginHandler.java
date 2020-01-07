@@ -1,6 +1,7 @@
 package com.study.netty.firstchat.server.course16.server.handler;
 
 import com.study.netty.firstchat.server.course16.common.AttributesConstants;
+import com.study.netty.firstchat.server.course16.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -14,7 +15,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class CheckUserIsLoginHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if(!ctx.channel().attr(AttributesConstants.LOGIN).get()){
+        if(SessionUtil.checkIsLogin(ctx.channel())){
             ctx.channel().close();
         }else{
             ctx.channel().pipeline().remove(CheckUserIsLoginHandler.class);

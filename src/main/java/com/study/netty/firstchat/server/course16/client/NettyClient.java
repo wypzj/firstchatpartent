@@ -4,6 +4,9 @@ import com.study.netty.firstchat.server.course16.client.handler.LoginResponseHan
 import com.study.netty.firstchat.server.course16.client.handler.MessageResponseHandler;
 import com.study.netty.firstchat.server.course16.commonhandler.PacketDecoder;
 import com.study.netty.firstchat.server.course16.commonhandler.PacketEncoder;
+import com.study.netty.firstchat.server.course16.packet.LoginRequestPacket;
+import com.study.netty.firstchat.server.course16.server.handler.Spliter;
+import com.study.netty.firstchat.server.course16.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -28,7 +31,7 @@ public class NettyClient {
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        //TODO 效验使用的协议以及对沾包半包问题的处理handler
+                        ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
@@ -65,15 +68,25 @@ public class NettyClient {
             while (!Thread.interrupted()) {
                 //TODO 判断当前用户是否已经登录
                 // 未登录：提示输入用户名进行登录
-                if (false) {
+                if (!SessionUtil.checkIsLogin(channel)) {
                     System.out.println("请输入用户名进行登录：");
                     String userName = scanner.nextLine();
+                    LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+                    loginRequestPacket.setUserName(userName);
+                    channel.writeAndFlush(loginRequestPacket);
+                    //线程等待两秒再轮询查询响应
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     //已经登录
+                    System.out.println("登录成功！可以发送消息了：");
                     String input = scanner.nextLine();
 
                 }
             }
-        });
+        }).start();
     }
 }

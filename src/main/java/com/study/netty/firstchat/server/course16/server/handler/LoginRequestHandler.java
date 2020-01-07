@@ -2,8 +2,13 @@ package com.study.netty.firstchat.server.course16.server.handler;
 
 import com.study.netty.firstchat.server.course16.common.AttributesConstants;
 import com.study.netty.firstchat.server.course16.packet.LoginRequestPacket;
+import com.study.netty.firstchat.server.course16.packet.LoginResponsePacket;
+import com.study.netty.firstchat.server.course16.util.Session;
+import com.study.netty.firstchat.server.course16.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
+import java.util.UUID;
 
 /**
  * @author 卫云鹏
@@ -13,10 +18,20 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket msg) throws Exception {
         String userName = msg.getUserName();
-        if(userName != null){
-            System.out.println("服务端收到【"+userName+"】发送的登录请求。。。");
+        String userId = UUID.randomUUID().toString();
+        if (userName != null) {
+            System.out.println("服务端收到【" + userName + "】发送的登录请求。。。");
+            Session session = new Session();
+            session.setUserId(userId);
+            session.setUserName(userName);
+            SessionUtil.bindSession(session, ctx.channel());
             ctx.channel().attr(AttributesConstants.LOGIN).set(true);
-        }else{
+            LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
+            loginResponsePacket.setUserId(userId);
+            loginResponsePacket.setUserName(userName);
+            loginResponsePacket.setLoginTig(true);
+            ctx.channel().writeAndFlush(loginResponsePacket);
+        } else {
             System.out.println("发送的登录请求数据错误。。。");
         }
     }
