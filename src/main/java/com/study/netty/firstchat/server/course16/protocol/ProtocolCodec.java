@@ -6,12 +6,14 @@ import com.study.netty.firstchat.server.course16.packet.inter.AbstractPacket;
 import com.study.netty.firstchat.server.course16.serializer.JSONSerializer;
 import com.study.netty.firstchat.server.course16.serializer.inter.Serializer;
 import io.netty.buffer.ByteBuf;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 协议解析/封装工具类
  * @author 卫云鹏
  * @date in 19:38 2020/1/6
  */
+@Slf4j
 public class ProtocolCodec {
     public static final int MAGIC_NUMBER = 0X123456;
 
@@ -73,7 +75,7 @@ public class ProtocolCodec {
         if(serializerNum == SerializeConstants.JSON_SERIALIZER){
             return new JSONSerializer();
         }
-        //TODO 匹配不到应该报错
+        log.error("没有匹配到相应的序列化器");
         return null;
     }
 }

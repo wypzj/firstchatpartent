@@ -66,7 +66,6 @@ public class NettyClient {
             //持续监听当前线程
             Scanner scanner = new Scanner(System.in);
             while (!Thread.interrupted()) {
-                //TODO 判断当前用户是否已经登录
                 // 未登录：提示输入用户名进行登录
                 if (!SessionUtil.checkIsLogin(channel)) {
                     System.out.println("请输入用户名进行登录：");

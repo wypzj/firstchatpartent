@@ -1,6 +1,8 @@
 package com.study.netty.firstchat.server.course16.common;
 
 import com.study.netty.firstchat.server.course16.packet.LoginRequestPacket;
+import com.study.netty.firstchat.server.course16.packet.LoginResponsePacket;
+import com.study.netty.firstchat.server.course16.packet.MessagePacket;
 import com.study.netty.firstchat.server.course16.packet.inter.AbstractPacket;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public enum CommandsAndClassEnum {
-    LOGIN_REQUEST(Commands.LOGIN_REQUEST, LoginRequestPacket.class);
+    LOGIN_REQUEST(Commands.LOGIN_REQUEST, LoginRequestPacket.class),
+    LOGIN_RESPONSE(Commands.LOGIN_RESPONSE, LoginResponsePacket.class),
+    MESSAGE(Commands.MESSAGE_REQUEST, MessagePacket.class);
 
     /**
      * 指令字节
@@ -35,7 +39,7 @@ public enum CommandsAndClassEnum {
                 return commandsAndClassEnum.packetClass;
             }
         }
-        //TODO 没有匹配到合适的应该报错
+        log.error("没有匹配到响应的协议类类类型");
         return null;
     }
 
