@@ -21,4 +21,14 @@ public class Commands {
      * 消息响应指令
      */
     public static final byte MESSAGE_RESPONSE = 4;
+
+    /**
+     * 创建群组请求指令
+     */
+    public static final byte CREATE_GROUP_REQUEST = 5;
+
+    /**
+     * 创建群组响应指令
+     */
+    public static final byte CREATE_GROUP_RESPONSE = 6;
 }
