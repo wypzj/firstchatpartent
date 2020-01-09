@@ -25,7 +25,7 @@ public class CheckUserIsLoginHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        if(!ctx.channel().attr(AttributesConstants.LOGIN).get()){
+        if(ctx.channel().attr(AttributesConstants.LOGIN).get() == null || !ctx.channel().attr(AttributesConstants.LOGIN).get()){
             System.out.println("当前用户未登录，连接关闭！");
         }else{
             System.out.println("当前用户已经登录，移除登录效验的handler");

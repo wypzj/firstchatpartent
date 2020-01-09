@@ -20,6 +20,7 @@ import java.util.UUID;
 public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<CreateGroupRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, CreateGroupRequestPacket msg) throws Exception {
+        System.out.println("CreateGroupRequestHandler");
         List<String> memberUserIds = msg.getMemberUserIds();
         List<String> memberUserNameList = new ArrayList<>(memberUserIds.size() == 0 ? 16 : memberUserIds.size());
         System.out.println(memberUserIds.size());
