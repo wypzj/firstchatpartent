@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 /**
  * 控制台命令控制器
+ * @author a small asshole
  */
 public class ConsoleCommandManager implements ConsoleCommandInter {
     private Map<String, ConsoleCommandInter> consoleCommandInterMap = new HashMap<>(16);
@@ -23,7 +24,10 @@ public class ConsoleCommandManager implements ConsoleCommandInter {
         //next方法结束标志 空格 tab键 回车键
         String command = scanner.next();
         ConsoleCommandInter consoleCommand = consoleCommandInterMap.get(command);
-        //TODO 对consoleCommandInter判空
-        consoleCommand.exec(scanner, channel);
+        if(consoleCommand != null){
+            consoleCommand.exec(scanner, channel);
+        }else{
+            System.out.println("当前输入的【"+command+"】指令无法识别，请重新输入");
+        }
     }
 }

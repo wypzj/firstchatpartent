@@ -1,5 +1,8 @@
 package com.study.netty.firstchat.server.course16.client;
 
+import com.study.netty.firstchat.server.course16.client.console.ConsoleCommandManager;
+import com.study.netty.firstchat.server.course16.client.console.LoginConsoleCommand;
+import com.study.netty.firstchat.server.course16.client.handler.CreateGroupResponseHandler;
 import com.study.netty.firstchat.server.course16.client.handler.LoginResponseHandler;
 import com.study.netty.firstchat.server.course16.client.handler.MessageResponseHandler;
 import com.study.netty.firstchat.server.course16.commonhandler.PacketDecoder;
@@ -34,6 +37,7 @@ public class NettyClient {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new CreateGroupResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
@@ -62,17 +66,15 @@ public class NettyClient {
     }
 
     private static void startConsoleThread(Channel channel) {
+        LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
+        ConsoleCommandManager commandManager = new ConsoleCommandManager();
         new Thread(() -> {
             //持续监听当前线程
             Scanner scanner = new Scanner(System.in);
             while (!Thread.interrupted()) {
                 // 未登录：提示输入用户名进行登录
                 if (!SessionUtil.checkIsLogin(channel)) {
-                    System.out.println("请输入用户名进行登录：");
-                    String userName = scanner.nextLine();
-                    LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-                    loginRequestPacket.setUserName(userName);
-                    channel.writeAndFlush(loginRequestPacket);
+                    loginConsoleCommand.exec(scanner,channel);
                     //线程等待两秒再轮询查询响应
                     try {
                         Thread.sleep(2000);
@@ -81,9 +83,7 @@ public class NettyClient {
                     }
                 } else {
                     //已经登录
-                    System.out.println("登录成功！可以发送消息了：");
-                    String input = scanner.nextLine();
-
+                    commandManager.exec(scanner,channel);
                 }
             }
         }).start();

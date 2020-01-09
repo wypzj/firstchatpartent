@@ -1,8 +1,6 @@
 package com.study.netty.firstchat.server.course16.common;
 
-import com.study.netty.firstchat.server.course16.packet.LoginRequestPacket;
-import com.study.netty.firstchat.server.course16.packet.LoginResponsePacket;
-import com.study.netty.firstchat.server.course16.packet.MessagePacket;
+import com.study.netty.firstchat.server.course16.packet.*;
 import com.study.netty.firstchat.server.course16.packet.inter.AbstractPacket;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 public enum CommandsAndClassEnum {
     LOGIN_REQUEST(Commands.LOGIN_REQUEST, LoginRequestPacket.class),
     LOGIN_RESPONSE(Commands.LOGIN_RESPONSE, LoginResponsePacket.class),
-    MESSAGE(Commands.MESSAGE_REQUEST, MessagePacket.class);
+    MESSAGE(Commands.MESSAGE_REQUEST, MessagePacket.class),
+    CREATEGROUP_REQUEST(Commands.CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class),
+    CREATEGROUP_RESPONSE(Commands.CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
+
 
     /**
      * 指令字节
@@ -33,9 +34,9 @@ public enum CommandsAndClassEnum {
         this.packetClass = packetClass;
     }
 
-    public static Class<? extends AbstractPacket> getPacketClass(byte commandType){
-        for (CommandsAndClassEnum commandsAndClassEnum:CommandsAndClassEnum.values()) {
-            if(commandsAndClassEnum.commandType == commandType){
+    public static Class<? extends AbstractPacket> getPacketClass(byte commandType) {
+        for (CommandsAndClassEnum commandsAndClassEnum : CommandsAndClassEnum.values()) {
+            if (commandsAndClassEnum.commandType == commandType) {
                 return commandsAndClassEnum.packetClass;
             }
         }

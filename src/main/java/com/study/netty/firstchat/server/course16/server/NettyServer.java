@@ -2,10 +2,7 @@ package com.study.netty.firstchat.server.course16.server;
 
 import com.study.netty.firstchat.server.course16.commonhandler.PacketDecoder;
 import com.study.netty.firstchat.server.course16.commonhandler.PacketEncoder;
-import com.study.netty.firstchat.server.course16.server.handler.CheckUserIsLoginHandler;
-import com.study.netty.firstchat.server.course16.server.handler.Spliter;
-import com.study.netty.firstchat.server.course16.server.handler.LoginRequestHandler;
-import com.study.netty.firstchat.server.course16.server.handler.MessageHandler;
+import com.study.netty.firstchat.server.course16.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -34,6 +31,7 @@ public class NettyServer {
                         ch.pipeline().addLast(new LoginRequestHandler());
                         //效验是否登录的handler，在确认登录后热拔插移除这个handler
                         ch.pipeline().addLast(new CheckUserIsLoginHandler());
+                        ch.pipeline().addLast(new CreateGroupRequestHandler());
                         ch.pipeline().addLast(new MessageHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
