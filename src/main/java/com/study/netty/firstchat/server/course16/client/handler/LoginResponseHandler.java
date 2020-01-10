@@ -13,7 +13,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginResponsePacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponsePacket msg) throws Exception {
-        System.out.println("登录请求的响应。。。。");
         boolean loginTig = msg.isLoginTig();
         if (loginTig){
             Session session = new Session();

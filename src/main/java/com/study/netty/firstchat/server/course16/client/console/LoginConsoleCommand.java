@@ -19,5 +19,11 @@ public class LoginConsoleCommand implements ConsoleCommandInter {
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
         loginRequestPacket.setUserName(userName);
         channel.writeAndFlush(loginRequestPacket);
+        //线程等待两秒再轮询查询响应
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

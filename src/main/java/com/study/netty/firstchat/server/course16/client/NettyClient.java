@@ -75,12 +75,6 @@ public class NettyClient {
                 // 未登录：提示输入用户名进行登录
                 if (!SessionUtil.checkIsLogin(channel)) {
                     loginConsoleCommand.exec(scanner,channel);
-                    //线程等待两秒再轮询查询响应
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 } else {
                     //已经登录
                     commandManager.exec(scanner,channel);

@@ -16,7 +16,7 @@ public class ConsoleCommandManager implements ConsoleCommandInter {
     private Map<String, ConsoleCommandInter> consoleCommandInterMap = new HashMap<>(16);
 
     public ConsoleCommandManager() {
-        consoleCommandInterMap.put("creatGroup", new CreateGroupConsoleCommand());
+        consoleCommandInterMap.put("createGroup", new CreateGroupConsoleCommand());
     }
 
     @Override

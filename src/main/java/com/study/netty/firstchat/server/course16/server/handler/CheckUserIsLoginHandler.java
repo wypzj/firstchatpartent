@@ -15,7 +15,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class CheckUserIsLoginHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if(SessionUtil.checkIsLogin(ctx.channel())){
+        if(!SessionUtil.checkIsLogin(ctx.channel())){
             ctx.channel().close();
         }else{
             ctx.channel().pipeline().remove(CheckUserIsLoginHandler.class);
