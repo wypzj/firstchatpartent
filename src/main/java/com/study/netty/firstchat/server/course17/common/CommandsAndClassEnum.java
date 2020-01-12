@@ -11,12 +11,30 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public enum CommandsAndClassEnum {
+    /**
+     * 登录请求/响应-指令和类类型对应关系
+     */
     LOGIN_REQUEST(Commands.LOGIN_REQUEST, LoginRequestPacket.class),
     LOGIN_RESPONSE(Commands.LOGIN_RESPONSE, LoginResponsePacket.class),
+    /**
+     * 发送消息-指令和消息类类型对应关系
+     */
     MESSAGE(Commands.MESSAGE_REQUEST, MessagePacket.class),
+    /**
+     * 创建群聊请求、响应
+     */
     CREATEGROUP_REQUEST(Commands.CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class),
     CREATEGROUP_RESPONSE(Commands.CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class),
-    JOINGROUP_REQUEST(Commands.JOIN_CROUP_REQUEST,JoinGroupRequestPacket.class);
+    /**
+     * 加入群聊请求、响应
+     */
+    JOINGROUP_REQUEST(Commands.JOIN_CROUP_REQUEST, JoinGroupRequestPacket.class),
+    JOINGROUP_RESPONSE(Commands.JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class),
+    /**
+     * 退出群聊请求、响应
+     */
+    QUITGROUP_REQUEST(Commands.QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class),
+    QUITGROUP_RESPONSE(Commands.QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
 
 
     /**

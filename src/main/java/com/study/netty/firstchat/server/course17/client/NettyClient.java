@@ -7,6 +7,7 @@ import com.study.netty.firstchat.server.course17.client.handler.LoginResponseHan
 import com.study.netty.firstchat.server.course17.client.handler.MessageResponseHandler;
 import com.study.netty.firstchat.server.course17.commonhandler.PacketDecoder;
 import com.study.netty.firstchat.server.course17.commonhandler.PacketEncoder;
+import com.study.netty.firstchat.server.course17.server.handler.JoinGroupResponseHandler;
 import com.study.netty.firstchat.server.course17.server.handler.Spliter;
 import com.study.netty.firstchat.server.course17.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
@@ -37,6 +38,7 @@ public class NettyClient {
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginResponseHandler());
                         ch.pipeline().addLast(new CreateGroupResponseHandler());
+                        ch.pipeline().addLast(new JoinGroupResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }

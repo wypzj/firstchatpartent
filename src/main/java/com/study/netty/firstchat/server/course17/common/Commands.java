@@ -40,6 +40,15 @@ public class Commands {
     /**
      * 加入群组【响应】指令
      */
-
     public static final byte JOIN_GROUP_RESPONSE = 8;
+
+    /**
+     * 退出群组【请求】指令
+     */
+    public static final byte QUIT_GROUP_REQUEST = 9;
+
+    /**
+     * 退出群组【响应】指令
+     */
+    public static final byte QUIT_GROUP_RESPONSE = 10;
 }
