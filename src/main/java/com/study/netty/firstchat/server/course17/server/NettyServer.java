@@ -33,6 +33,7 @@ public class NettyServer {
                         ch.pipeline().addLast(new CheckUserIsLoginHandler());
                         ch.pipeline().addLast(new CreateGroupRequestHandler());
                         ch.pipeline().addLast(new JoinGroupRequestHandler());
+                        ch.pipeline().addLast(new QuitGroupRequestHandler());
                         ch.pipeline().addLast(new MessageHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
