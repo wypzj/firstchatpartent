@@ -17,6 +17,8 @@ public class ConsoleCommandManager implements ConsoleCommandInter {
     public ConsoleCommandManager() {
         consoleCommandInterMap.put("createGroup", new CreateGroupConsoleCommand());
         consoleCommandInterMap.put("joinGroup", new JoinGroupConsoleCommand());
+        consoleCommandInterMap.put("quitGroup", new QuitGroupConsoleCommand());
+        consoleCommandInterMap.put("listMembers",new ListGroupMemberConsoleCommand());
     }
 
     @Override

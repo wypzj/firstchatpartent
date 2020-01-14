@@ -51,4 +51,14 @@ public class Commands {
      * 退出群组【响应】指令
      */
     public static final byte QUIT_GROUP_RESPONSE = 10;
+
+    /**
+     * 查询群成员【请求】指令
+     */
+    public static final byte LIST_GROUP_MEMBER_REQUEST = 11;
+
+    /**
+     * 查询群成员【响应】指令
+     */
+    public static final byte LIST_GROUP_MEMBER_RESPONSE = 12;
 }

@@ -34,7 +34,12 @@ public enum CommandsAndClassEnum {
      * 退出群聊请求、响应
      */
     QUITGROUP_REQUEST(Commands.QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class),
-    QUITGROUP_RESPONSE(Commands.QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
+    QUITGROUP_RESPONSE(Commands.QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class),
+    /**
+     * 查询群成员请求、响应
+     */
+    LISTGROUPMEMBER_REQUEST(Commands.LIST_GROUP_MEMBER_REQUEST, ListMembersGroupRequestPacket.class),
+    LISTGROUPMEMBER_RESPONSE(Commands.LIST_GROUP_MEMBER_RESPONSE, ListMembersGroupResponsePacket.class);
 
 
     /**

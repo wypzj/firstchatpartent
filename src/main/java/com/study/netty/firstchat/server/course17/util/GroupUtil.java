@@ -3,6 +3,7 @@ package com.study.netty.firstchat.server.course17.util;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -66,11 +67,30 @@ public class GroupUtil {
 
     /**
      * 根据groupId获取channelGroup
+     *
      * @param groupId
      * @return
      * @since 1.0
      */
-    public static ChannelGroup getChannelGroup(String groupId){
+    public static ChannelGroup getChannelGroup(String groupId) {
         return GROUP_CHANNEL_MAP.get(groupId);
+    }
+
+    /**
+     * 根据groupId获取群组中成员
+     *
+     * @param groupId
+     * @return
+     * @since 1.0
+     */
+    public static List<String> listGroupMembers(String userId, String groupId) {
+        List<String> memberList = GROUP_MEMBERIDLIST_MAP.get(groupId);
+        boolean containsOrNot = memberList.contains(userId);
+        if (!containsOrNot){
+            //TODO 优化
+            System.out.println("不是当前群组成员，无法查看该组成员列表");
+            return new ArrayList<>();
+        }
+        return memberList;
     }
 }
