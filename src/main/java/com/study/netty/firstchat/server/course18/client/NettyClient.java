@@ -40,6 +40,7 @@ public class NettyClient {
                         ch.pipeline().addLast(new JoinGroupResponseHandler());
                         ch.pipeline().addLast(new ListMembersGroupResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new TestOutBoundHandler());
                     }
                 });
         connectServer(bootstrap);
