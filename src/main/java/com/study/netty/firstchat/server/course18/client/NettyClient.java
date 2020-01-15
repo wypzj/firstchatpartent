@@ -2,10 +2,7 @@ package com.study.netty.firstchat.server.course18.client;
 
 import com.study.netty.firstchat.server.course18.client.console.ConsoleCommandManager;
 import com.study.netty.firstchat.server.course18.client.console.LoginConsoleCommand;
-import com.study.netty.firstchat.server.course18.client.handler.CreateGroupResponseHandler;
-import com.study.netty.firstchat.server.course18.client.handler.ListMembersGroupResponseHandler;
-import com.study.netty.firstchat.server.course18.client.handler.LoginResponseHandler;
-import com.study.netty.firstchat.server.course18.client.handler.MessageResponseHandler;
+import com.study.netty.firstchat.server.course18.client.handler.*;
 import com.study.netty.firstchat.server.course18.commonhandler.PacketCodeCHandler;
 import com.study.netty.firstchat.server.course18.server.handler.JoinGroupResponseHandler;
 import com.study.netty.firstchat.server.course18.server.handler.Spliter;
@@ -37,6 +34,8 @@ public class NettyClient {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(PacketCodeCHandler.INSTANCE);
                         ch.pipeline().addLast(new LoginResponseHandler());
+                        //发送心跳包
+                        ch.pipeline().addLast(HeartBeatTimerHandler.INSTANCE);
                         ch.pipeline().addLast(new CreateGroupResponseHandler());
                         ch.pipeline().addLast(new JoinGroupResponseHandler());
                         ch.pipeline().addLast(new ListMembersGroupResponseHandler());

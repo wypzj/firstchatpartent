@@ -1,6 +1,7 @@
 package com.study.netty.firstchat.server.course18.server.handler;
 
 import com.study.netty.firstchat.server.course18.common.AttributesConstants;
+import com.study.netty.firstchat.server.course18.packet.HeartBeatRequestPacket;
 import com.study.netty.firstchat.server.course18.util.SessionUtil;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -20,11 +21,13 @@ public class CheckUserIsLoginHandler extends ChannelInboundHandlerAdapter {
     private CheckUserIsLoginHandler(){}
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if(!SessionUtil.checkIsLogin(ctx.channel())){
-            ctx.channel().close();
-        }else{
-            ctx.channel().pipeline().remove(CheckUserIsLoginHandler.class);
-            super.channelRead(ctx, msg);
+        if(!(msg instanceof HeartBeatRequestPacket)){
+            if(!SessionUtil.checkIsLogin(ctx.channel())){
+                ctx.channel().close();
+            }else{
+                ctx.channel().pipeline().remove(CheckUserIsLoginHandler.class);
+                super.channelRead(ctx, msg);
+            }
         }
     }
 

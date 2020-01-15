@@ -1,5 +1,6 @@
 package com.study.netty.firstchat.server.course18.server;
 
+import com.study.netty.firstchat.server.course18.commonhandler.IMIdleStateHandler;
 import com.study.netty.firstchat.server.course18.commonhandler.PacketCodeCHandler;
 import com.study.netty.firstchat.server.course18.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
@@ -24,6 +25,8 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
+                        //空闲检测
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         //效验使用的协议以及对沾包半包问题的处理handler
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(PacketCodeCHandler.INSTANCE);

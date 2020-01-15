@@ -40,7 +40,11 @@ public enum CommandsAndClassEnum {
      * 查询群成员请求、响应
      */
     LISTGROUPMEMBER_REQUEST(Commands.LIST_GROUP_MEMBER_REQUEST, ListMembersGroupRequestPacket.class),
-    LISTGROUPMEMBER_RESPONSE(Commands.LIST_GROUP_MEMBER_RESPONSE, ListMembersGroupResponsePacket.class);
+    LISTGROUPMEMBER_RESPONSE(Commands.LIST_GROUP_MEMBER_RESPONSE, ListMembersGroupResponsePacket.class),
+    /**
+     * 客户端心跳请求
+     */
+    HEART_BEAT_REQUEST(Commands.HEART_BEAT_REQUEST, HeartBeatRequestPacket.class);
 
 
     /**

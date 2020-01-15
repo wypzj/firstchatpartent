@@ -61,4 +61,9 @@ public class Commands {
      * 查询群成员【响应】指令
      */
     public static final byte LIST_GROUP_MEMBER_RESPONSE = 12;
+
+    /**
+     * 心跳检测【请求】指令
+     */
+    public static final byte HEART_BEAT_REQUEST = 13;
 }
