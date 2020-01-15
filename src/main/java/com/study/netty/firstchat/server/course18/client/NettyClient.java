@@ -6,8 +6,7 @@ import com.study.netty.firstchat.server.course18.client.handler.CreateGroupRespo
 import com.study.netty.firstchat.server.course18.client.handler.ListMembersGroupResponseHandler;
 import com.study.netty.firstchat.server.course18.client.handler.LoginResponseHandler;
 import com.study.netty.firstchat.server.course18.client.handler.MessageResponseHandler;
-import com.study.netty.firstchat.server.course18.commonhandler.PacketDecoder;
-import com.study.netty.firstchat.server.course18.commonhandler.PacketEncoder;
+import com.study.netty.firstchat.server.course18.commonhandler.PacketCodeCHandler;
 import com.study.netty.firstchat.server.course18.server.handler.JoinGroupResponseHandler;
 import com.study.netty.firstchat.server.course18.server.handler.Spliter;
 import com.study.netty.firstchat.server.course18.util.SessionUtil;
@@ -36,13 +35,12 @@ public class NettyClient {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline().addLast(new Spliter());
-                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(PacketCodeCHandler.INSTANCE);
                         ch.pipeline().addLast(new LoginResponseHandler());
                         ch.pipeline().addLast(new CreateGroupResponseHandler());
                         ch.pipeline().addLast(new JoinGroupResponseHandler());
                         ch.pipeline().addLast(new ListMembersGroupResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
-                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
         connectServer(bootstrap);

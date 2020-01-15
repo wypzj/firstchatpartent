@@ -1,7 +1,6 @@
 package com.study.netty.firstchat.server.course18.server;
 
-import com.study.netty.firstchat.server.course18.commonhandler.PacketDecoder;
-import com.study.netty.firstchat.server.course18.commonhandler.PacketEncoder;
+import com.study.netty.firstchat.server.course18.commonhandler.PacketCodeCHandler;
 import com.study.netty.firstchat.server.course18.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -27,12 +26,11 @@ public class NettyServer {
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         //效验使用的协议以及对沾包半包问题的处理handler
                         ch.pipeline().addLast(new Spliter());
-                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(PacketCodeCHandler.INSTANCE);
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
                         //效验是否登录的handler，在确认登录后热拔插移除这个handler
                         ch.pipeline().addLast(CheckUserIsLoginHandler.INSTANCE);
                         ch.pipeline().addLast(IMHandler.INSTANCE);
-                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 }).bind(3308);
     }
